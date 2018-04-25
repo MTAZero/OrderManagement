@@ -1,0 +1,2 @@
+server: http://137.74.174.141:18000
+api: http://137.74.174.141:18000/vrpsolver/api/v1/vrp
