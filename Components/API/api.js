@@ -1,7 +1,6 @@
-import data from './customer.json';
 const api = 'http://137.74.174.141:18000/vrpsolver/api/v1/vrp';
 
-const getList = async () =>{
+const getList = async (data) =>{
     var ans = await fetch(api, {
         method: 'POST',
         headers: {
@@ -15,7 +14,7 @@ const getList = async () =>{
     .then((data) => data.json())
     .then((dt) => {
         console.log("data : ",dt);
-        return dt.tours[0].customers;
+        return dt.tours[1].customers;
     })
     .then((dt) => {
         var ans = [];
@@ -33,8 +32,6 @@ const getList = async () =>{
             };
             ans = ans.concat(item);
         }
-
-        console.log(ans);
 
         return ans;
     })

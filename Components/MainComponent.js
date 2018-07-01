@@ -8,6 +8,9 @@ import {Card, Container, Button} from 'native-base';
 // Function
 import ApiHelper from './API/api'
 import MapViewDirections from 'react-native-maps-directions';
+
+// data 
+import data from './API/customer.json';
  
 const destination = {latitude: 21.0480817,longitude: 105.8012362};
 const GOOGLE_MAPS_APIKEY = 'AIzaSyAPYoGZt-UG4-URgqc1xFW5xWLvk4VLfzE';
@@ -33,7 +36,7 @@ export default class MainComponent extends Component{
     }
 
     callServer = async () => {
-        var ans = await ApiHelper.getList();
+        var ans = await ApiHelper.getList(data);
         
         console.log("Ans : ", ans);
 
@@ -49,8 +52,9 @@ export default class MainComponent extends Component{
             };
             directions = directions.concat(item);
         }
-        this.setState({stringList: JSON.stringify(ans), listPosition: positions, directions: directions, indexDirections: -1});
-        console.log(this.state.directions);
+        this.setState({stringList: JSON.stringify(ans), listPosition: positions, directions: directions, indexDirections: 0});
+        this.ChangeIndexDirections(0);
+        //console.log(this.state.directions);
     }
 
     ChangeIndexDirections = (index) => {
@@ -77,19 +81,27 @@ export default class MainComponent extends Component{
         return(
             <Container>
                 <Card style={{padding: 5}}>
-                    <MapView initialRegion={{
-                        latitude: this.state.mapPosition.latitude,
-                        longitude: this.state.mapPosition.longitude,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
+                    <MapView 
+                        initialRegion={{
+                            latitude: this.state.mapPosition.latitude,
+                            longitude: this.state.mapPosition.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                        region = {{
+                            latitude: this.state.mapPosition.latitude,
+                            longitude: this.state.mapPosition.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421
+                        }}
+                        showsUserLocation = {true}
                         style = {{width: "100%", height: 300, borderRadius: 5, borderColor:'black', borderWidth: 1}}
                     >
                         {
                             this.state.listPosition.map((item, index) => {
-                                var color = "orange";
-                                if (index == this.state.indexDirections) color="green";
-                                if (index == this.state.indexDirections+1) color="lightblue";
+                                var color = "black";
+                                if (index == this.state.indexDirections) color="red";
+                                if (index == this.state.indexDirections+1) color="green";
                                 return (
                                     <Marker
                                         coordinate={{latitude: item.latitude, longitude: item.longitude}}
@@ -97,7 +109,11 @@ export default class MainComponent extends Component{
                                         description=""
                                         pinColor= {color}
                                         key = {item.customerID}
-                                    />
+                                    >
+                                        <View style={{backgroundColor: color, height: 20, width: 20, borderRadius: 5}}>
+                                            <Text style={{color: 'white', textAlign: 'center'}}>{item.customerID}</Text>
+                                        </View>
+                                    </Marker>
                                 );
                              } )
                         }
@@ -110,7 +126,7 @@ export default class MainComponent extends Component{
                                         destination={item.destination}
                                         apikey= {GOOGLE_MAPS_APIKEY}
                                         strokeWidth={(index == this.state.indexDirections) ? 2 : 2}
-                                        strokeColor={(index == this.state.indexDirections) ? "red" : "green"}
+                                        strokeColor={(index == this.state.indexDirections) ? "red" : "black"}
                                         key = {index}
                                     />
                                 );
