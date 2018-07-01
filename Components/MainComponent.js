@@ -38,7 +38,8 @@ export default class MainComponent extends Component{
             data: [
             ],
             tourIndex: 0,
-            listCustomer: data
+            listCustomer: data,
+            showModal: true
         };
     }
 
@@ -116,6 +117,10 @@ export default class MainComponent extends Component{
         this.setState({listCustomer: a});
     }
 
+    showModal= (show)=>{
+        this.setState({showModal:show});
+    }
+
     render() {
         return(
             <Container>
@@ -123,17 +128,20 @@ export default class MainComponent extends Component{
                 <Modal
                     animationType="slide"
                     transparent={false}
-                    visible={false}
+                    visible={this.state.showModal}
                     onRequestClose={() => {
                 }}>
 
                     <View>
-                        <AddCustomer/>
+                        <AddCustomer listCustomer={this.state.listCustomer} addCustomer={this.addCustomer}/>
                     </View> 
+                    <Button primary full style= {{margin: 30, padding: 5}} onPress={()=>this.showModal(false)}>
+                        <Text style={{color: 'white'}}>Cancel</Text>
+                    </Button>
                 </Modal>
 
                 <Card style={{padding: 5}}>
-                    <Button success style= {{margin: 10, padding: 5}}>
+                    <Button success style= {{margin: 10, padding: 5}} onPress={()=>this.showModal(true)}>
                         <Text style={{color: 'black'}}>Add Customer</Text>
                     </Button>
                     <MapView 

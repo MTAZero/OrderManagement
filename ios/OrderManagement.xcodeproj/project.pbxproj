@@ -50,6 +50,7 @@
 		06B6E714A8A14152AD4D5BF7 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5EC3A70CF5046F6871EF4BB /* SimpleLineIcons.ttf */; };
 		91501E4B6F314638B905B5AF /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A956868632FA4590B8F6CCF6 /* Zocial.ttf */; };
 		81EBCC1CDCEF40EC9324C212 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C463F9A160F849D894689762 /* libAirMaps.a */; };
+		91A59753CE034FE78652EBE0 /* libRNGooglePlaces.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 947443694F5B477F924CF9A0 /* libRNGooglePlaces.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -369,6 +370,8 @@
 		A956868632FA4590B8F6CCF6 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3A4D207055254502B5402722 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C463F9A160F849D894689762 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3FDFD3BF15B4433EB8C0E94B /* RNGooglePlaces.xcodeproj */ = {isa = PBXFileReference; name = "RNGooglePlaces.xcodeproj"; path = "../node_modules/react-native-google-places/ios/RNGooglePlaces.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		947443694F5B477F924CF9A0 /* libRNGooglePlaces.a */ = {isa = PBXFileReference; name = "libRNGooglePlaces.a"; path = "libRNGooglePlaces.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +401,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				81EBCC1CDCEF40EC9324C212 /* libAirMaps.a in Frameworks */,
+				91A59753CE034FE78652EBE0 /* libRNGooglePlaces.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +589,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				3A4D207055254502B5402722 /* AirMaps.xcodeproj */,
+				3FDFD3BF15B4433EB8C0E94B /* RNGooglePlaces.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1249,6 +1254,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Debug;
@@ -1274,6 +1280,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Release;
@@ -1296,6 +1303,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Debug;
@@ -1317,6 +1325,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Release;
@@ -1351,6 +1360,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Debug;
@@ -1385,6 +1395,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Release;
@@ -1418,6 +1429,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Debug;
@@ -1451,6 +1463,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 			};
 			name = Release;
