@@ -32,7 +32,7 @@ const getList = async (data) =>{
             }
             ans = ans.concat(dt.tours[index].depot);
             itemIndex.customers = ans;
-            itemIndex.title = title+"->D";
+            itemIndex.title = title+"->D; Distance : "+itemIndex.distance;
 
             res = res.concat(itemIndex);
         }

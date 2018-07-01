@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import MapView,{Marker} from 'react-native-maps';
 
 // UI
-import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity, Modal} from 'react-native';
 import {Card, Container, Button, Picker} from 'native-base';
 
 // Function
@@ -11,7 +11,10 @@ import MapViewDirections from 'react-native-maps-directions';
 
 // data 
 import data from './API/customer.json';
- 
+
+// component
+import AddCustomer from './AddComponent.js';
+
 const destination = {latitude: 21.0480817,longitude: 105.8012362};
 const GOOGLE_MAPS_APIKEY = 'AIzaSyAPYoGZt-UG4-URgqc1xFW5xWLvk4VLfzE';
 
@@ -34,12 +37,13 @@ export default class MainComponent extends Component{
             },
             data: [
             ],
-            tourIndex: 0
+            tourIndex: 0,
+            listCustomer: data
         };
     }
 
     callServer = async () => {
-        var ans = await ApiHelper.getList(data);
+        var ans = await ApiHelper.getList(this.state.listCustomer);
         this.setState({data:ans});
         this.ChangeIndexTours(0);
 
@@ -99,15 +103,39 @@ export default class MainComponent extends Component{
         this.selectTour();
     }
 
+    addCustomer(lat, long, address, demand){
+        var customer = {
+            address: address,
+            demand: demand,
+            latitude: lat,
+            longitude: long,
+            id: this.state.listCustomer.length+1
+        };
+        var a = this.state.listCustomer;
+        a = a.concat(customer);
+        this.setState({listCustomer: a});
+    }
 
     render() {
-        // return (
-        //     <CallApi />
-        // );
-
         return(
             <Container>
+
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={false}
+                    onRequestClose={() => {
+                }}>
+
+                    <View>
+                        <AddCustomer/>
+                    </View> 
+                </Modal>
+
                 <Card style={{padding: 5}}>
+                    <Button success style= {{margin: 10, padding: 5}}>
+                        <Text style={{color: 'black'}}>Add Customer</Text>
+                    </Button>
                     <MapView 
                         initialRegion={{
                             latitude: this.state.mapPosition.latitude,
@@ -204,3 +232,4 @@ export default class MainComponent extends Component{
         );
     }
 }
+

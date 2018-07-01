@@ -25,13 +25,6 @@
       "longitude": 105.7947172
     },
 	{
-      "address": "489 Hoàng Quốc Việt, Cổ Nhuế 1, Cầu Giấy, Hà Nội, Việt Nam",
-	  "demand": 100,
-      "id": "3",
-      "latitude": 21.0456933,
-      "longitude": 105.7828644
-    },
-	{
       "address": "Minh Khai, Khu đô thị Times City, Vĩnh Tuy, Hai Bà Trưng, Hà Nội, Việt Nam",
 	  "demand": 400,
       "id": "4",
