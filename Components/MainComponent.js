@@ -3,7 +3,7 @@ import MapView,{Marker} from 'react-native-maps';
 
 // UI
 import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
-import {Card, Container, Button} from 'native-base';
+import {Card, Container, Button, Picker} from 'native-base';
 
 // Function
 import ApiHelper from './API/api'
@@ -31,20 +31,38 @@ export default class MainComponent extends Component{
             mapPosition: {
                 latitude: 21.037649, 
                 longitude: 105.7816119
-            }
+            },
+            data: [
+            ],
+            tourIndex: 0
         };
     }
 
     callServer = async () => {
         var ans = await ApiHelper.getList(data);
+        this.setState({data:ans});
+        this.ChangeIndexTours(0);
+
+        console.log(ans);
         
+        //console.log(this.state.directions);
+    }
+
+    selectTour = () => {
+        ans = this.state.data[this.state.tourIndex].customers;
+        if (ans == null) return;
+        console.log(this.state.tourIndex);
         console.log("Ans : ", ans);
 
         var directions = [];
-        var positions = ans;
-        for(var i = 0; i<ans.length-1; i++){
+        var positions = [];
+
+        for(var index = 0; index<ans.length-1; index++)
+            positions = positions.concat(ans[index]);
+
+        for(var i = 0; i<positions.length; i++){
             var origin = positions[i];
-            var destination = positions[i+1];
+            var destination = positions[(i+1)%positions.length];
             var item = {
                 origin: origin,
                 destination: destination,
@@ -52,9 +70,10 @@ export default class MainComponent extends Component{
             };
             directions = directions.concat(item);
         }
+
+        console.log("Directions : ", directions);
         this.setState({stringList: JSON.stringify(ans), listPosition: positions, directions: directions, indexDirections: 0});
         this.ChangeIndexDirections(0);
-        //console.log(this.state.directions);
     }
 
     ChangeIndexDirections = (index) => {
@@ -72,6 +91,14 @@ export default class MainComponent extends Component{
             }
         );
     }
+
+    ChangeIndexTours = async(index) => {
+        if (index<0 || index>=this.state.data.length) return;
+
+        await this.setState({tourIndex: index});
+        this.selectTour();
+    }
+
 
     render() {
         // return (
@@ -95,7 +122,7 @@ export default class MainComponent extends Component{
                             longitudeDelta: 0.0421
                         }}
                         showsUserLocation = {true}
-                        style = {{width: "100%", height: 300, borderRadius: 5, borderColor:'black', borderWidth: 10}}
+                        style = {{width: "100%", height: 250, borderRadius: 5, borderColor:'black', borderWidth: 10}}
                     >
                         {
                             this.state.listPosition.map((item, index) => {
@@ -136,6 +163,24 @@ export default class MainComponent extends Component{
                     <Button primary full style= {{margin: 10, padding: 5}} onPress={() => this.callServer()}>
                         <Text style={{color: 'white'}}>Call to Server</Text>
                     </Button>
+
+                    <View style={{ borderWidth: 1, borderColor: 'black', height: 35, backgroundColor: 'lightgreen'}}>
+                        <Picker
+                            mode="dropdown"
+                            style={{height: 35}}
+                            selectedValue = {this.state.tourIndex}
+                            onValueChange = {(value) => this.ChangeIndexTours(value)}
+                        >
+                            
+                            {
+                                this.state.data.map((item, index)=>{
+                                    return(
+                                        <Picker.Item label={item.title} value={index} key={index}/>
+                                    );
+                                })
+                            }
+                        </Picker>
+                    </View>
                     
                     <ScrollView style={{height: 300}}>
                     {
