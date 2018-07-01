@@ -95,7 +95,7 @@ export default class MainComponent extends Component{
                             longitudeDelta: 0.0421
                         }}
                         showsUserLocation = {true}
-                        style = {{width: "100%", height: 300, borderRadius: 5, borderColor:'black', borderWidth: 1}}
+                        style = {{width: "100%", height: 300, borderRadius: 5, borderColor:'black', borderWidth: 10}}
                     >
                         {
                             this.state.listPosition.map((item, index) => {
@@ -105,10 +105,9 @@ export default class MainComponent extends Component{
                                 return (
                                     <Marker
                                         coordinate={{latitude: item.latitude, longitude: item.longitude}}
-                                        title={item.customerID}
                                         description=""
                                         pinColor= {color}
-                                        key = {item.customerID}
+                                        key = {index}
                                     >
                                         <View style={{backgroundColor: color, height: 20, width: 20, borderRadius: 5}}>
                                             <Text style={{color: 'white', textAlign: 'center'}}>{item.customerID}</Text>
@@ -141,11 +140,11 @@ export default class MainComponent extends Component{
                     <ScrollView style={{height: 300}}>
                     {
                             this.state.directions.map( (item, index) => {
-                                var backgroundColor = "lightgray";
-                                if (index == this.state.indexDirections) backgroundColor = "green";
+                                var backgroundColor = "white";
+                                if (index == this.state.indexDirections) backgroundColor = "lightgray";
 
                                 return(
-                                    <TouchableOpacity style = {{backgroundColor : backgroundColor, marginTop: 5}} key={index} onPress= {() => this.ChangeIndexDirections(index)}>
+                                    <TouchableOpacity style = {{backgroundColor : backgroundColor, marginTop: 5, borderWidth: 1, borderColor:'black'}} key={index} onPress= {() => this.ChangeIndexDirections(index)}>
                                         <Text style ={{margin: 5, color: 'black'}} >Bước {index+1} : Đi từ 
                                             <Text> ({item.origin.customerID}) {item.origin.name} </Text> đến 
                                             <Text> ({item.destination.customerID}) {item.destination.name} </Text>

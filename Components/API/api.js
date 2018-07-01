@@ -14,18 +14,41 @@ const getList = async (data) =>{
     .then((data) => data.json())
     .then((dt) => {
         console.log("data : ",dt);
-        return dt.tours[1].customers;
+
+        var ans = [];
+        ans = ans.concat(data.depot);
+
+        for(var index = 1; index<2; index++){
+            console.log(dt.tours[index].customers);
+            for(var index2= 0; index2<dt.tours[index].customers.length; index2++){
+                ans = ans.concat(dt.tours[index].customers[index2]);
+            }
+            ans = ans.concat(dt.tours[index].depot);
+        }
+
+        console.log("Ans : ",ans);
+
+        return ans;
     })
     .then((dt) => {
         var ans = [];
         for(var  i=0; i<dt.length; i++){
             var Name = "Heii";
+            var ID;
             //console.log("item : ",dt[i]);
-            data.requests.forEach(element => {
-                if (element.id == dt[i].customerID) Name = element.address
-            });
+            if (dt[i].customerID != null){
+                ID = dt[i].customerID;
+                data.requests.forEach(element => {
+                    if (element.id == dt[i].customerID) Name = element.address
+                });
+            }
+            else {
+                ID = "D";
+                Name = data.depot.address;
+            }
+
             var item = {
-                customerID: dt[i].customerID,
+                customerID: ID,
                 latitude: dt[i].latitude,
                 longitude: dt[i].longitude,
                 name: Name

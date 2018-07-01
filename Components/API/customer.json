@@ -3,7 +3,8 @@
     "capacity": 1000,
     "latitude": 21.0456933,
     "longitude": 105.7828644,
-    "nbvehicles": 100
+    "nbvehicles": 100,
+    "address": "Trống đồng, cuối Hoàng Quốc Việt"
   },
   "maxnodesperroute": 5,
   "maxroutelength": 3944808,
