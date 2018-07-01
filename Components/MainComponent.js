@@ -48,7 +48,7 @@ export default class MainComponent extends Component{
         this.setState({data:ans});
         this.ChangeIndexTours(0);
 
-        console.log(ans);
+        //console.log(ans);
         
         //console.log(this.state.directions);
     }
@@ -56,8 +56,8 @@ export default class MainComponent extends Component{
     selectTour = () => {
         ans = this.state.data[this.state.tourIndex].customers;
         if (ans == null) return;
-        console.log(this.state.tourIndex);
-        console.log("Ans : ", ans);
+        //console.log(this.state.tourIndex);
+        //console.log("Ans : ", ans);
 
         var directions = [];
         var positions = [];
@@ -76,7 +76,7 @@ export default class MainComponent extends Component{
             directions = directions.concat(item);
         }
 
-        console.log("Directions : ", directions);
+        //console.log("Directions : ", directions);
         this.setState({stringList: JSON.stringify(ans), listPosition: positions, directions: directions, indexDirections: 0});
         this.ChangeIndexDirections(0);
     }
@@ -104,16 +104,18 @@ export default class MainComponent extends Component{
         this.selectTour();
     }
 
-    addCustomer(lat, long, address, demand){
+    addCustomer(lat, long, address, demand, id){
+        console.log(lat, long, address, demand, id);
+        var value = parseFloat(demand);
         var customer = {
             address: address,
-            demand: demand,
+            demand: value,
             latitude: lat,
             longitude: long,
-            id: this.state.listCustomer.length+1
+            id: id.toString()
         };
         var a = this.state.listCustomer;
-        a = a.concat(customer);
+        a.requests = a.requests.concat(customer);
         this.setState({listCustomer: a});
     }
 
@@ -122,6 +124,7 @@ export default class MainComponent extends Component{
     }
 
     render() {
+        //console.log(this.state.listCustomer.requests);
         return(
             <Container>
 
@@ -133,16 +136,17 @@ export default class MainComponent extends Component{
                 }}>
 
                     <View>
-                        <AddCustomer listCustomer={this.state.listCustomer} addCustomer={this.addCustomer}/>
+                        <AddCustomer 
+                            listCustomer={this.state.listCustomer.requests} 
+                            addCustomer={(lat, long, add, de, id)=>this.addCustomer(lat, long, add, de, id)} 
+                            showModal={this.showModal}
+                        />
                     </View> 
-                    <Button primary full style= {{margin: 30, padding: 5}} onPress={()=>this.showModal(false)}>
-                        <Text style={{color: 'white'}}>Cancel</Text>
-                    </Button>
                 </Modal>
 
                 <Card style={{padding: 5}}>
                     <Button success style= {{margin: 10, padding: 5}} onPress={()=>this.showModal(true)}>
-                        <Text style={{color: 'black'}}>Add Customer</Text>
+                        <Text style={{color: 'white'}}>Add Customer</Text>
                     </Button>
                     <MapView 
                         initialRegion={{
