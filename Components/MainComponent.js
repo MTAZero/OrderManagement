@@ -39,7 +39,7 @@ export default class MainComponent extends Component{
             ],
             tourIndex: 0,
             listCustomer: data,
-            showModal: true
+            showModal: false
         };
     }
 
